@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Video</title>
+</head>
+<body>
+    
+    <video width="300" controls>
+        <source src="" type="video/ogg" id="video">
+        
+      </video>
+    <script>
+
+
+        async function loadVideo(){
+            await fetch("https://www.pexels.com/video/buildings-with-a-foggy-background-in-timelapse-mode-2015875/", {
+	"method": "GET"})
+.then(response => {
+    document.getElementById('video').src = response.url
+	
+})
+.catch(error => {
+	console.log(error);
+});
+        }
+
+        loadVideo()
+    </script>
+</body>
+</html>
