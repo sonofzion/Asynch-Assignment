@@ -11,22 +11,49 @@
         <source src="" type="video/mp4" id="video">
         
       </video>
-    <script>
+      
+<script>
+    
+    play("https://www.pexels.com/video/footage-of-the-waves-crashing-the-shoreline-3326783/")    
 
 
-        async function loadVideo(){
-            await fetch("https://www.pexels.com/video/buildings-with-a-foggy-background-in-timelapse-mode-2015875/", {
-	"method": "GET"})
-.then(response => {
-    document.getElementById('video').src = response.url
-	
-})
-.catch(error => {
-	console.log(error);
-});
-        }
+async function createVideo(src)
+{
+        let video = document.createElement('video')
+        video.setAttribute('controls','controls' )
+        video.setAttribute('id','video')
+         let source = document.createElement('source')
+         video.src= src
+         video.type = "video/mp4"
+         video.appendChild(source)
+    try {
+        await video.onload
+        document.body.append(video)
+    } catch(err) {
+        alert(err);
+    }
 
-        loadVideo()
+}
+
+
+
+async function play(source) {
+    await createVideo(source)
+    let video = document.getElementById("video");     
+    let promise = video.play();
+
+    if (promise !== undefined) {
+        promise.then(_ => {
+        // initialize Autoplay 
+    }).catch(error => {
+        alert("Autoplay was prevented \nClick on play to start video")
+    });
+   } 
+}
+
+//Autoplay stopped working on Google Chrome due to new policy 
+
+
     </script>
 </body>
 </html>
